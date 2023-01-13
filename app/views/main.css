@@ -58,6 +58,7 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3.5rem;
+  margin-bottom: 7rem;
 }
 
 .task-color-container {
@@ -99,7 +100,7 @@ nav a:hover {
 }
 
 form input {
-  width: 300px;
+  width: 400px;
   padding: 0.5rem 1rem;
   display: inline-block;
   border: 1px solid rgb(150, 49, 128);

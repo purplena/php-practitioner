@@ -15,8 +15,8 @@ class TasksController
     // retrieve all completed tasks 
     $tasksCompleted  = App::get('database')->query("select * from todos where completed=1 ORDER BY id DESC"); 
     // merge two arrays
-    $tasks = array_merge($tasksUncompleted, $tasksCompleted);
-    return view('tasks', ['tasks' => $tasks]);
+    // $tasks = array_merge($tasksUncompleted, $tasksCompleted);
+    return view('tasks', ['tasksUncompleted' => $tasksUncompleted, 'tasksCompleted' => $tasksCompleted]);
   }
 
   public function store()
