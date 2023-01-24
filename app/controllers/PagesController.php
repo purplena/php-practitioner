@@ -10,6 +10,16 @@ class PagesController
 
      }
 
+     public function account()
+     {
+          return view('account');
+     }
+
+     public function log()
+     {
+          return view('log');
+     }
+
      public function about()
      {
           $company = 'Laracast'; 

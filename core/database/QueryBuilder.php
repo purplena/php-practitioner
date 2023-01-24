@@ -62,7 +62,8 @@ class QueryBuilder
     try {
       $statement = $this->pdo->prepare("select * from {$table} where id = :id");
       $statement->execute($params);
-      return $statement->fetch(PDO::FETCH_ASSOC);
+      // return $statement->fetch(PDO::FETCH_ASSOC);
+      return $statement->fetchAll(PDO::FETCH_CLASS);
     } catch (Exception $e) {
       die('Whoops, problems with "Select One" method');
     }
@@ -83,7 +84,11 @@ class QueryBuilder
     try {
       $statement = $this->pdo->prepare($query);
       $statement->execute($params);
-      return $statement->fetchAll(PDO::FETCH_CLASS);
+      return $statement;
+      // In Controller use
+      // $statement->fetch(PDO::FETCH_ASSOC); -> to return an array
+      // $statement->fetchAll(PDO::FETCH_CLASS); -> to return object (array of arryas)
+
     } catch (Exception $e) {
       die('Whoops, problems with "Query" method');
     }

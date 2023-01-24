@@ -1,9 +1,23 @@
+<?php
+use App\Core\App; 
+?>
+
 <div class="nav-container">
   <nav>
           <a href="/">Home</a>
           <a href="/about">About</a>
           <a href="/tasks">Tasks</a>
-          <a href="/users">Blog</a>
+          <a href="/log">
+            <?php 
+            
+            
+            if (App::get('auth')->isAuthenticated()) {
+              $user = App::get('auth')->getUser();
+            echo "Hi " . $user['user_name'] . "!";
+          } else {
+            echo "Log In";
+            } ?>
+          </a>
   </nav>
 </div>
 <div class="underline-container">
