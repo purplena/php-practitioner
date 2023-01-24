@@ -24,7 +24,7 @@ namespace App\Core;
         return $this->callAction(
         ...explode('@', $this->routes[$requestType][$uri]));
       }
-      throw new Exception('No routes defined for this URI');
+      throw new \Exception('No routes defined for this URI');
     }
 
     protected function callAction($controller, $action)
@@ -33,7 +33,7 @@ namespace App\Core;
       $controller = new $controller;
 
       if(! method_exists($controller, $action)){
-      throw new Exception(
+      throw new \Exception(
         "{$controller} does not respond to the {$action} action."
       );
       }

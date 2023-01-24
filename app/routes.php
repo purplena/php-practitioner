@@ -3,7 +3,8 @@
 $router->get('', 'PagesController@home');
 $router->get('about', 'PagesController@about');
 $router->get('contact', 'PagesController@contact');
-$router->get('arrays', 'PagesController@arrays');
+$router->get('log', 'PagesController@log');
+$router->get('account', 'PagesController@account');
 
 
 $router->get('users', 'UsersController@index');
@@ -18,3 +19,6 @@ $router->get('tasks/changeStatus', 'TasksController@changeTaskStatus');
 $router->get('tasks/edit', 'TasksController@editTaskIndex');
 $router->post('tasks/edit', 'TasksController@editTaskStore');
 
+// Authentification
+$router->post('login', 'AuthController@auth');
+$router->get('logout', 'AuthController@logout');

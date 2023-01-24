@@ -1,5 +1,7 @@
 <?php
-require 'vendor/autoload.php';
+ session_start();
+
+ require 'vendor/autoload.php';
 require 'core/bootstrap.php';
 
 use App\Core\{Router, Request};

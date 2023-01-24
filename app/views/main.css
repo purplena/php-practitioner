@@ -151,3 +151,23 @@ input:focus {
 
 /* Edit Tasks Page */
 /* All the style properies are inherited by the page "http://php-practitioner.localhost/tasks"  */
+
+.log-in-section {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+}
+
+.auth-form {
+  margin-top: 2rem;
+}
+
+.auth-form .row {
+  margin-bottom: 1rem;
+}
+
+.log-in-message {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}

@@ -10,10 +10,13 @@ class TasksController
   {
     // $tasks = App::get('database')->selectAll('todos')
     $tasks = App::get('database')->selectAllByDescendingOrderById('todos');
+
+    $user = App::get('auth')->getUser();
+
     // retrieve all uncompleted tasks ordered by id ASC
-    $tasksUncompleted = App::get('database')->query("select * from todos where completed=0 ORDER BY id DESC");
+    $tasksUncompleted = App::get('database')->query("select * from todos where completed=0 ORDER BY id DESC")->fetchAll(\PDO::FETCH_CLASS);
     // retrieve all completed tasks 
-    $tasksCompleted  = App::get('database')->query("select * from todos where completed=1 ORDER BY id DESC"); 
+    $tasksCompleted  = App::get('database')->query("select * from todos where completed=1 ORDER BY id DESC")->fetchAll(\PDO::FETCH_CLASS); 
     // merge two arrays
     // $tasks = array_merge($tasksUncompleted, $tasksCompleted);
     return view('tasks', ['tasksUncompleted' => $tasksUncompleted, 'tasksCompleted' => $tasksCompleted]);
