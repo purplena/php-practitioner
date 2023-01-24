@@ -3,6 +3,9 @@
 use App\Core\App;
 use App\Core\Auth;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();    
+
 App::bind('config', require 'config.php');
 
 App::bind('auth', new Auth());
@@ -18,4 +21,8 @@ function view($name, $data=[])
 function redirect($path)
 {
  header("Location:/{$path}");
+}
+
+function env($key){
+    return $_ENV[$key];
 }

@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  web:
+    image: thecodingmachine/php:8.2-v4-apache-node18
+    ports:
+      - 80:80
+    volumes:
+      - ..:/var/www/html
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
