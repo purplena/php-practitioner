@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models; 
+namespace App\Models;
 
-class Project 
+class Project
 {
- 
 }

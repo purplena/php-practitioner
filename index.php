@@ -1,9 +1,10 @@
 <?php
+
  session_start();
 
  require 'vendor/autoload.php';
-require 'core/bootstrap.php';
+ require 'core/bootstrap.php';
 
-use App\Core\{Router, Request};
+ use App\Core\{Request, Router};
 
-Router::load('app/routes.php')->direct(Request::uri(), Request::method());
+ Router::load('app/routes.php')->direct(Request::uri(), Request::method());

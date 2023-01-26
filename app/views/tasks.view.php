@@ -14,7 +14,7 @@
     <div class="task-section-container">
         <div class="task-container">
             <?php foreach ($tasksUncompleted as $task) : ?> 
-                <?php require ('app/views/partials/task-card.view.php'); ?>
+                <?php require('app/views/partials/task-card.view.php'); ?>
             <?php endforeach; ?>
         </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="task-section-container">
         <div class="task-container">
             <?php foreach ($tasksCompleted as $task) : ?> 
-                <?php require ('app/views/partials/task-card.view.php'); ?>
+                <?php require('app/views/partials/task-card.view.php'); ?>
             <?php endforeach; ?>
         </div>
     </div>
