@@ -3,6 +3,7 @@
 class QueryBuilder
 {
     protected $pdo;
+
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
@@ -12,6 +13,7 @@ class QueryBuilder
     {
         $statement = $this->pdo->prepare("select * from {$table}");
         $statement->execute();
+
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
@@ -19,6 +21,7 @@ class QueryBuilder
     {
         $statement = $this->pdo->prepare("select * from {$table} ORDER BY completed ASC");
         $statement->execute();
+
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
@@ -26,12 +29,12 @@ class QueryBuilder
     {
         $statement = $this->pdo->prepare("select * from {$table} ORDER BY id DESC");
         $statement->execute();
+
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
     public function insert($table, $parameters)
     {
-
         $sql = sprintf(
             'insert into %s (%s) values (%s)',
             $table,
@@ -43,7 +46,7 @@ class QueryBuilder
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
         } catch (Exception $e) {
-            die('Whoops, something went wrong');
+            exit('Whoops, something went wrong');
         }
     }
 
@@ -53,7 +56,7 @@ class QueryBuilder
             $statement = $this->pdo->prepare("delete from {$table} where id = :id");
             $statement->execute($params);
         } catch (Exception $e) {
-            die('Whoops, problems with "delete" method');
+            exit('Whoops, problems with "delete" method');
         }
     }
 
@@ -67,7 +70,7 @@ class QueryBuilder
             // $statement->fetchAll(PDO::FETCH_CLASS); -> to return object (array of arryas)
             return $statement;
         } catch (Exception $e) {
-            die('Whoops, problems with "Select One" method');
+            exit('Whoops, problems with "Select One" method');
         }
     }
 
@@ -77,7 +80,7 @@ class QueryBuilder
             $statement = $this->pdo->prepare("update {$table} set completed =:status where id = :id");
             $statement->execute($params);
         } catch (Exception $e) {
-            die('Whoops, problems with "changeStatus" method');
+            exit('Whoops, problems with "changeStatus" method');
         }
     }
 
@@ -86,12 +89,13 @@ class QueryBuilder
         try {
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
+
             return $statement;
             // In Controller use
             // $statement->fetch(PDO::FETCH_ASSOC); -> to return an array
             // $statement->fetchAll(PDO::FETCH_CLASS); -> to return object (array of arryas)
         } catch (Exception $e) {
-            die('Whoops, problems with "Query" method');
+            exit('Whoops, problems with "Query" method');
         }
     }
 
@@ -101,7 +105,7 @@ class QueryBuilder
             $statement = $this->pdo->prepare("update {$table} set description =:description where id = :id");
             $statement->execute($params);
         } catch (Exception $e) {
-            die('Whoops, problems with "edit" method');
+            exit('Whoops, problems with "edit" method');
         }
     }
 }

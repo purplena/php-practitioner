@@ -8,19 +8,22 @@ class Router
         'GET' => [],
         'POST' => [],
         'DELETE' => [],
-        'PATCH' => []
+        'PATCH' => [],
     ];
 
     public static function load($file)
     {
-        $router = new static;
+        $router = new static();
         require $file;
+
         return $router;
     }
+
     public function get($uri, $controller)
     {
         $this->routes['GET'][$uri] = $controller;
     }
+
     public function post($uri, $controller)
     {
         $this->routes['POST'][$uri] = $controller;
@@ -49,13 +52,12 @@ class Router
     protected function callAction($controller, $action)
     {
         $controller = "App\\Controllers\\{$controller}";
-        $controller = new $controller;
+        $controller = new $controller();
 
         if (!method_exists($controller, $action)) {
-            throw new \Exception(
-                "{$controller} does not respond to the {$action} action."
-            );
+            throw new \Exception("{$controller} does not respond to the {$action} action.");
         }
+
         return $controller->$action();
     }
 }

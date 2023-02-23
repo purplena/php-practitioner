@@ -23,7 +23,7 @@
         <!-- Delete Button -->
         <form method="POST">
             <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="id" value="<?= $task->id ?>">
+            <input type="hidden" name="id" value="<?= $task->id; ?>">
             <div class="task-button">
                 <button class="delete-button">Delete</button>
             </div>
