@@ -6,20 +6,19 @@ use App\Core\App;
 
 class AuthController
 {
-  public function auth()
-  {
-    if (App::get('auth')->checkUserAndAuthenticate($_POST['email'], $_POST['password'])) {
-      return redirect('log');
-    } else {
-      return redirect('');
+    public function auth()
+    {
+        if (App::get('auth')->checkUserAndAuthenticate($_POST['email'], $_POST['password'])) {
+            return redirect('log');
+        } else {
+            return redirect('');
+        }
     }
-  }
 
-  public function logout()
-  {
-    App::get('auth')->logOut();
-    return redirect('');
-  }
+    public function logout()
+    {
+        App::get('auth')->logOut();
 
-  
-  }
+        return redirect('');
+    }
+}

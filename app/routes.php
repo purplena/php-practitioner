@@ -6,7 +6,6 @@ $router->get('contact', 'PagesController@contact');
 $router->get('log', 'PagesController@log');
 $router->get('account', 'PagesController@account');
 
-
 $router->get('users', 'UsersController@index');
 $router->post('users', 'UsersController@store');
 
