@@ -17,8 +17,8 @@ $router->delete('tasks', 'TasksController@deleteTask');
 $router->get('tasks/changeStatus', 'TasksController@changeTaskStatus');
 
 // Edit tasks
-$router->get('task/edit', 'TasksController@editTaskIndex');
-$router->patch('task/store', 'TasksController@editTaskStore');
+$router->get('tasks/edit', 'TasksController@editTaskIndex');
+$router->patch('tasks/store', 'TasksController@editTaskStore');
 
 // Authentification
 $router->post('login', 'AuthController@auth');
