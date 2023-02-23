@@ -6,10 +6,12 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controllers\\AuthController' => $baseDir . '/app/controllers/AuthController.php',
     'App\\Controllers\\PagesController' => $baseDir . '/app/controllers/PagesController.php',
     'App\\Controllers\\TasksController' => $baseDir . '/app/controllers/TasksController.php',
     'App\\Controllers\\UsersController' => $baseDir . '/app/controllers/UsersController.php',
     'App\\Core\\App' => $baseDir . '/core/App.php',
+    'App\\Core\\Auth' => $baseDir . '/core/Auth.php',
     'App\\Core\\Request' => $baseDir . '/core/Request.php',
     'App\\Core\\Router' => $baseDir . '/core/Router.php',
     'App\\Models\\Project' => $baseDir . '/app/models/Project.php',

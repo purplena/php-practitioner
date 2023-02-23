@@ -12,12 +12,14 @@ $router->post('users', 'UsersController@store');
 
 $router->get('tasks', 'TasksController@index');
 $router->post('tasks', 'TasksController@store');
-$router->get('tasks/delete', 'TasksController@deleteTask');
+
+$router->delete('tasks', 'TasksController@deleteTask');
+
 $router->get('tasks/changeStatus', 'TasksController@changeTaskStatus');
 
 // Edit tasks
-$router->get('tasks/edit', 'TasksController@editTaskIndex');
-$router->post('tasks/edit', 'TasksController@editTaskStore');
+$router->get('task/edit', 'TasksController@editTaskIndex');
+$router->patch('task/store', 'TasksController@editTaskStore');
 
 // Authentification
 $router->post('login', 'AuthController@auth');

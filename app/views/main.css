@@ -79,6 +79,7 @@ nav a:hover {
 .task-button-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .task-button-container a {
@@ -88,6 +89,16 @@ nav a:hover {
   border-radius: 7px;
   font-size: 1rem;
   border: 1px solid #ff99d6;
+}
+
+.delete-button {
+  text-decoration: none;
+  padding: 0.5rem 1.25rem;
+  background: #e1d33d;
+  border-radius: 7px;
+  font-size: 1rem;
+  border: 1px solid #ff99d6;
+  margin: 0;
 }
 
 .task-button-container a:hover {
