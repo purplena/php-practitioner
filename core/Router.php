@@ -10,6 +10,7 @@ class Router
         'DELETE' => [],
         'PATCH' => []
     ];
+
     public static function load($file)
     {
         $router = new static;

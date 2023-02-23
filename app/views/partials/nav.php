@@ -1,5 +1,6 @@
 <?php
-use App\Core\App; 
+use App\Core\App;
+
 ?>
 
 <div class="nav-container">
@@ -8,14 +9,13 @@ use App\Core\App;
           <a href="/about">About</a>
           <a href="/tasks">Tasks</a>
           <a href="/log">
-            <?php 
-            
-            
+            <?php
+
             if (App::get('auth')->isAuthenticated()) {
-              $user = App::get('auth')->getUser();
-            echo "Hi " . $user['user_name'] . "!";
-          } else {
-            echo "Log In";
+                $user = App::get('auth')->getUser();
+                echo 'Hi ' . $user['user_name'] . '!';
+            } else {
+                echo 'Log In';
             } ?>
           </a>
   </nav>

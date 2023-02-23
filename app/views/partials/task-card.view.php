@@ -1,24 +1,24 @@
 <div class="task-color-container" style="<?php echo ($task->completed) ? 'opacity: 0.5;' : 'opacity: 1'; ?>">
     <div class="task-description">
         <?php if ($task->completed) {
-            echo '<strike>' . ($task->description) . '</strike>';
+            echo '<strike>' . $task->description . '</strike>';
         } else {
-            echo ($task->description);
+            echo $task->description;
         } ?>
     </div>
 
     <!-- Logic for Done/Undone buttons -->
     <?php if ($task->completed) {
-        $taskButtonText = "Undone";
+        $taskButtonText = 'Undone';
     } else {
-        $taskButtonText = "Done";
+        $taskButtonText = 'Done';
     } ?>
 
     <div class="task-button-container">
-        <div class="task-button"><a href="/tasks/changeStatus?id=<?php echo $task->id; ?>"><?php print $taskButtonText; ?></a></div>
+        <div class="task-button"><a href="/tasks/changeStatus?id=<?php echo $task->id; ?>"><?php echo $taskButtonText; ?></a></div>
 
         <!-- Edit  -->
-        <div style="<?php echo ($task->completed) ? 'opacity: 0;' : 'opacity: 1'; ?>" class="task-button"><a href="/task/edit?id=<?php echo $task->id; ?>">Edit</a></div>
+        <div style="<?php echo ($task->completed) ? 'opacity: 0;' : 'opacity: 1'; ?>" class="task-button"><a href="/tasks/edit?id=<?php echo $task->id; ?>">Edit</a></div>
 
         <!-- Delete Button -->
         <form method="POST">

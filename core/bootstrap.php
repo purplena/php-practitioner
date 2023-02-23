@@ -3,19 +3,28 @@
 use App\Core\App;
 use App\Core\Auth;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
 App::bind('config', require 'config.php');
 
 App::bind('auth', new Auth());
 
 App::bind('database', new QueryBuilder(Connection::make(App::get('config')['database'])));
 
-function view($name, $data=[]) 
+function view($name, $data = [])
 {
- extract($data);
- return require "app/views/{$name}.view.php";
+    extract($data);
+
+    return require "app/views/{$name}.view.php";
 }
 
 function redirect($path)
 {
- header("Location:/{$path}");
+    header("Location:/{$path}");
+}
+
+function env($key)
+{
+    return $_ENV[$key];
 }

@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Controllers; 
+namespace App\Controllers;
 
 use App\Core\App;
 
-class UsersController 
+class UsersController
 {
-  public function index()
-  {
-    $users = App::get('database')->selectAll('users');
-    return view('users', ['users' => $users]);
-  }
+    public function index()
+    {
+        $users = App::get('database')->selectAll('users');
 
-  public function store()
-  {
-    App::get('database')->insert('users', [
-  'name' => $_POST['name']
-  ]);
+        return view('users', ['users' => $users]);
+    }
 
-  return redirect('users');
-  }
+    public function store()
+    {
+        App::get('database')->insert('users', [
+            'name' => $_POST['name'],
+        ]);
+
+        return redirect('users');
+    }
 }
