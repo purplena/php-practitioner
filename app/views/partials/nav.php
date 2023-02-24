@@ -1,14 +1,14 @@
 <?php
+
 use App\Core\App;
 
 ?>
 
 <div class="nav-container">
-  <nav>
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/tasks">Tasks</a>
-          <a href="/log">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/tasks">Tasks</a>
+        <a href="/log">
             <?php
 
             if (App::get('auth')->isAuthenticated()) {
@@ -17,9 +17,9 @@ use App\Core\App;
             } else {
                 echo 'Log In';
             } ?>
-          </a>
-  </nav>
+        </a>
+    </nav>
 </div>
 <div class="underline-container">
-  <div class="underline"></div>
+    <div class="underline"></div>
 </div>

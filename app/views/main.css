@@ -6,6 +6,20 @@
   color: rgb(71, 38, 59);
 }
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+h3 {
+  margin-bottom: 1rem;
+}
+
 /* Navbar */
 .nav-container {
   display: flex;
@@ -26,6 +40,7 @@ nav a {
 
 nav a:hover {
   background: rgb(236, 215, 231);
+  border-radius: 10px;
 }
 
 .underline-container {
@@ -49,9 +64,10 @@ nav a:hover {
   max-width: 1180px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3rem;
+  margin-top: 4rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  height: 100%-79px;
 }
 
 .task-container {
@@ -167,7 +183,7 @@ input:focus {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .auth-form {
@@ -181,4 +197,72 @@ input:focus {
 .log-in-message {
   margin-top: 2rem;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.about-image {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.border-container {
+  border: #fa7dc898 solid 2px;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+footer {
+  text-align: center;
+  margin-top: auto;
+}
+
+footer p {
+  font-size: smaller;
+}
+
+.footer-underline {
+  margin-top: 5rem;
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  width: 25px;
+}
+
+.icon-container {
+  display: flex;
+  gap: 1rem;
+  align-self: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.log-button {
+  display: block;
+  font-size: 1rem;
+  padding: 0.25rem 1.5rem;
+  border: transparent;
+  border-radius: 5px;
+  background-color: #9c4177;
+  color: #fff;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2rem;
+}
+
+.log-button:hover {
+  background-color: #ae6992;
+}
+
+a {
+  text-decoration: none;
 }

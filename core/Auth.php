@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+
 class Auth
 {
     public function getUser()
@@ -18,18 +19,28 @@ class Auth
         return isset($_SESSION['id']);
     }
 
+
     public function checkUserAndAuthenticate($email, $password)
     {
         $user = App::get('database')->query('select * from users where email = :email and password = :password', [':email' => $email, ':password' => $password])->fetch(\PDO::FETCH_ASSOC);
 
-        if ($user['password'] === $password && $user['email'] === $email) {
+        if ($user === false) {
+            return false;
+        } else {
             $_SESSION['id'] = $user['id'];
 
             return true;
-        } else {
-            return false;
         }
+
+        // if ($user['password'] === $password && $user['email'] === $email) {
+        //     $_SESSION['id'] = $user['id'];
+
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     }
+
 
     public function logOut()
     {

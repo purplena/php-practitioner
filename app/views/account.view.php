@@ -4,4 +4,4 @@
 <h1>You are looged in</h1>
 <a href="/">log out</a> -->
 
- <?php require('app/views/partials/footer.php'); ?>
+<?php require('app/views/partials/footer.php'); ?>

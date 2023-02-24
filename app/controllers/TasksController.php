@@ -23,30 +23,10 @@ class TasksController
         return redirect('tasks');
     }
 
-    public function formatTaskDescription($description)
-    {
-        return ucfirst(strtolower($description));
-    }
-
     public function deleteTask()
     {
         $id = $_POST['id'];
         App::get('database')->delete('todos', [':id' => $id]);
-
-        return redirect('tasks');
-    }
-
-    public function changeTaskStatus()
-    {
-        $id = $_GET['id'];
-        $task = App::get('database')->selectOne('todos', [':id' => $id])->fetch(\PDO::FETCH_ASSOC);
-
-        if (1 === $task['completed']) {
-            $newStatus = 0;
-        } else {
-            $newStatus = 1;
-        }
-        App::get('database')->changeStatus('todos', [':id' => $id, ':status' => $newStatus]);
 
         return redirect('tasks');
     }
@@ -62,6 +42,26 @@ class TasksController
     public function editTaskStore()
     {
         App::get('database')->edit('todos', [':id' => $_POST['id'], ':description' => $_POST['description']]);
+
+        return redirect('tasks');
+    }
+
+    public function formatTaskDescription($description)
+    {
+        return ucfirst(strtolower($description));
+    }
+
+    public function changeTaskStatus()
+    {
+        $id = $_GET['id'];
+        $task = App::get('database')->selectOne('todos', [':id' => $id])->fetch(\PDO::FETCH_ASSOC);
+
+        if (1 === $task['completed']) {
+            $newStatus = 0;
+        } else {
+            $newStatus = 1;
+        }
+        App::get('database')->changeStatus('todos', [':id' => $id, ':status' => $newStatus]);
 
         return redirect('tasks');
     }

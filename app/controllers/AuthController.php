@@ -11,7 +11,7 @@ class AuthController
         if (App::get('auth')->checkUserAndAuthenticate($_POST['email'], $_POST['password'])) {
             return redirect('log');
         } else {
-            return redirect('');
+            return view(401);
         }
     }
 
