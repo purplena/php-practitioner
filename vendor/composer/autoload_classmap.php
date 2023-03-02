@@ -15,6 +15,7 @@ return array(
     'App\\Core\\Request' => $baseDir . '/core/Request.php',
     'App\\Core\\Response' => $baseDir . '/core/Response.php',
     'App\\Core\\Router' => $baseDir . '/core/Router.php',
+    'App\\Core\\Validator' => $baseDir . '/core/Validator.php',
     'App\\Models\\Project' => $baseDir . '/app/models/Project.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'ComposerAutoloaderInit257e218a4a2d0d23ae938e88f71feaef' => $vendorDir . '/composer/autoload_real.php',

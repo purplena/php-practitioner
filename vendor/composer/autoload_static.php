@@ -198,6 +198,7 @@ class ComposerStaticInit257e218a4a2d0d23ae938e88f71feaef
         'App\\Core\\Request' => __DIR__ . '/../..' . '/core/Request.php',
         'App\\Core\\Response' => __DIR__ . '/../..' . '/core/Response.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/core/Router.php',
+        'App\\Core\\Validator' => __DIR__ . '/../..' . '/core/Validator.php',
         'App\\Models\\Project' => __DIR__ . '/../..' . '/app/models/Project.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'ComposerAutoloaderInit257e218a4a2d0d23ae938e88f71feaef' => __DIR__ . '/..' . '/composer/autoload_real.php',

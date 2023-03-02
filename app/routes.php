@@ -1,8 +1,8 @@
 <?php
 
 $router->get('', 'PagesController@home');
-
 $router->get('log', 'PagesController@log');
+// $router->get('tasks/statistics', 'PagesController@statistics');
 // $router->get('account', 'PagesController@account');
 
 // $router->get('users', 'UsersController@index');
@@ -22,3 +22,7 @@ $router->patch('tasks/store', 'TasksController@editTaskStore');
 // Authentification
 $router->post('login', 'AuthController@auth');
 $router->get('logout', 'AuthController@logout');
+
+
+$router->post('tasks/statistics', 'TasksController@finishedTasks');
+$router->get('tasks/statistics', 'TasksController@statistics');

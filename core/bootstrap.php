@@ -12,6 +12,8 @@ App::bind('auth', new Auth());
 
 App::bind('database', new QueryBuilder(Connection::make(App::get('config')['database'])));
 
+
+
 function view($name, $data = [])
 {
     extract($data);
@@ -27,4 +29,12 @@ function redirect($path)
 function env($key)
 {
     return $_ENV[$key];
+}
+
+function dateReformat($date)
+{
+    $arrayExplode = explode(" ", $date)[0];
+    $reformat = str_replace('-', '/', $arrayExplode);
+    $newFormatDate = date("d/m/Y", strtotime($reformat));
+    return $newFormatDate;
 }
