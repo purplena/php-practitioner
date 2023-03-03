@@ -8,6 +8,7 @@ use App\Core\App;
     <nav>
         <a href="/">Home</a>
         <a href="/tasks">Tasks</a>
+        <a href="/tasks/statistics">Statistics</a>
         <a href="/log">
             <?php
 

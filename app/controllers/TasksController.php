@@ -9,10 +9,24 @@ class TasksController
 {
     public function index()
     {
-        $tasksUncompleted = App::get('database')->query('select * from todos where completed=0 ORDER BY id DESC')->fetchAll(\PDO::FETCH_CLASS);
-        $tasksCompleted = App::get('database')->query('select * from todos where completed=1 ORDER BY id DESC')->fetchAll(\PDO::FETCH_CLASS);
+        $tasksUncompleted = $this->tasksUncompleted();
+        $tasksCompleted = $this->tasksCompleted();
 
         return view('tasks', ['tasksUncompleted' => $tasksUncompleted, 'tasksCompleted' => $tasksCompleted]);
+    }
+
+    public function tasksUncompleted()
+    {
+        return App::get('database')
+            ->query('select * from todos where completed=0 ORDER BY id DESC')
+            ->fetchAll(\PDO::FETCH_CLASS);
+    }
+
+    public function tasksCompleted()
+    {
+        return App::get('database')
+            ->query('select * from todos where completed=1 ORDER BY id DESC')
+            ->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function store()
@@ -22,10 +36,11 @@ class TasksController
             $errors['description'] = 'Your task has to be less than 100 characters';
         }
 
-        $tasksUncompleted = App::get('database')->query('select * from todos where completed=0 ORDER BY id DESC')->fetchAll(\PDO::FETCH_CLASS);
-        $tasksCompleted = App::get('database')->query('select * from todos where completed=1 ORDER BY id DESC')->fetchAll(\PDO::FETCH_CLASS);
+        $tasksUncompleted = $this->tasksUncompleted();
+        $tasksCompleted = $this->tasksCompleted();
 
         if (!empty($errors)) {
+
             return view("tasks", [
                 'errors' => $errors,
                 'tasksUncompleted' => $tasksUncompleted,
@@ -33,32 +48,35 @@ class TasksController
             ]);
         }
 
-        App::get('database')->insert('todos', [
-            'description' => $this->formatTaskDescription($_POST['description']),
-        ]);
+        App::get('database')
+            ->insert(
+                'todos',
+                ['description' => $this->formatTaskDescription($_POST['description'])]
+            );
 
         return redirect('tasks');
     }
 
     public function deleteTask()
     {
-        $id = $_POST['id'];
-        App::get('database')->delete('todos', [':id' => $id]);
+        App::get('database')->delete('todos', [':id' => $_POST['id']]);
 
         return redirect('tasks');
     }
 
     public function editTaskIndex()
     {
-        $id = $_GET['id'];
-        $task = App::get('database')->selectOne('todos', [':id' => $id])->fetch(\PDO::FETCH_ASSOC);
+        $task = App::get('database')
+            ->selectOne('todos', [':id' => $_GET['id']])
+            ->fetch(\PDO::FETCH_ASSOC);
 
         return view('edit', ['task' => $task]);
     }
 
     public function editTaskStore()
     {
-        App::get('database')->edit('todos', [':id' => $_POST['id'], ':description' => $_POST['description']]);
+        App::get('database')
+            ->edit('todos', [':id' => $_POST['id'], ':description' => $_POST['description']]);
 
         return redirect('tasks');
     }
@@ -70,32 +88,59 @@ class TasksController
 
     public function changeTaskStatus()
     {
-        $id = $_GET['id'];
-        $task = App::get('database')->selectOne('todos', [':id' => $id])->fetch(\PDO::FETCH_ASSOC);
+        $task = App::get('database')
+            ->selectOne('todos', [':id' => $_GET['id']])
+            ->fetch(\PDO::FETCH_ASSOC);
 
 
-        if (1 === $task['completed']) {
+        if ($task['completed'] === 1) {
             $newStatus = 0;
+            App::get('database')
+                ->query(
+                    'UPDATE todos SET created_at = CURRENT_TIMESTAMP() WHERE id = :id',
+                    [':id' => $_GET['id']]
+                );
         } else {
             $newStatus = 1;
-            App::get('database')->query('UPDATE todos SET finished_at = CURRENT_TIMESTAMP() WHERE id = :id', [':id' => $_GET['id']]);
+            App::get('database')
+                ->query(
+                    'UPDATE todos SET completed_at = CURRENT_TIMESTAMP() WHERE id = :id',
+                    [':id' => $_GET['id']]
+                );
         }
-        App::get('database')->changeStatus('todos', [':id' => $id, ':status' => $newStatus]);
+        App::get('database')
+            ->changeStatus('todos', [':id' => $_GET['id'], ':status' => $newStatus]);
 
         return redirect('tasks');
     }
 
     public function finishedTasks()
     {
-        $number = App::get('database')->query('SELECT COUNT(*) as count FROM todos WHERE DATE(completed_at) = :completed_at', [':completed_at' => $_POST['completed_at']])->fetch(\PDO::FETCH_ASSOC);
-        return view('statistics', ['number' => $number]);
+        $completed_tasks_by_date = $this->counterOfTasks();
+        $number = App::get('database')
+            ->query(
+                'SELECT COUNT(*) as count FROM todos WHERE DATE(completed_at) = :completed_at AND completed=1',
+                [':completed_at' => $_POST['completed_at']]
+            )
+            ->fetch(\PDO::FETCH_ASSOC);
+
+        return view('statistics', ['number' => $number, 'completed_tasks_by_date' => $completed_tasks_by_date]);
     }
 
     public function statistics()
     {
-        $completedTasks = App::get('database')->query('select * from todos where completed=1')->fetchAll(\PDO::FETCH_CLASS);
+        $completed_tasks_by_date = $this->counterOfTasks();
+
+        return view('statistics', ['completed_tasks_by_date' => $completed_tasks_by_date]);
+    }
+
+    public  function counterOfTasks()
+    {
+        $completedTasks = App::get('database')
+            ->query('select * from todos where completed=1 ORDER BY DATE(completed_at) ASC')->fetchAll(\PDO::FETCH_CLASS);
 
         $completed_tasks_by_date = [];
+
         foreach ($completedTasks as $task) {
             $date = substr($task->completed_at, 0, 10);
             if (isset($completed_tasks_by_date[$date])) {
@@ -105,6 +150,6 @@ class TasksController
             }
         }
 
-        return view('statistics', ['completed_tasks_by_date' => $completed_tasks_by_date]);
+        return $completed_tasks_by_date;
     }
 }

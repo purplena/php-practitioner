@@ -24,7 +24,6 @@
 
     <h2 class="heading-2">Look how many tasks you've finished!</h2>
     <h5 class="heading-3">You can always add these tasks in your To-do list again!</h5>
-    <a href="/tasks/statistics" class="submit-button" style="width: 270px; margin-bottom: 4rem; text-align: center;">See the statistics</a>
     <div class="task-section-container">
         <?php foreach ($tasksCompleted as $task) : ?>
             <?php require('app/views/partials/notes/task-card.view.php'); ?>
