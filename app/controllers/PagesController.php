@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Controllers; 
+namespace App\Controllers;
+
+use App\Core\App;
 
 class PagesController
 {
-     public function home()
-     {
-          return view('index');
+    public function home()
+    {
+        return view('index');
+    }
 
-     }
+    public function account()
+    {
+        return view('account');
+    }
 
-     public function about()
-     {
-          $company = 'Laracast'; 
-          return view('about', ['company' => $company]);
-     }
+    public function log()
+    {
+        return view('log');
+    }
 
-     public function contact()
-     {
-          $telephone = '034464891002';
-          return view('contact', ['telephone' => $telephone]);
-     }
-
+    // public function statistics()
+    // {
+    //     return view('statistics');
+    // }
 }
