@@ -5,7 +5,7 @@ The course is called [**The PHP Practitioner**](https://laracasts.com/series/php
 
 ## Github Codespace
 
-- Soon
+- This app is codespace ready, you don't need to run any install command, just open the codespace and you are ready to go.
 
 ## Manual install
 
@@ -14,7 +14,8 @@ The course is called [**The PHP Practitioner**](https://laracasts.com/series/php
 - import database structure `cat .devcontainer/database-structure.sql | docker-compose -f .devcontainer/docker-compose.yml exec -T mysql mysql -u user -ppassword main`
 - create the `.env` file from the `.env.example` file
 
-## Next steps
+##  Code formatting
 
-- Codespace ready
-- Code Linter (php cs fixer : https://github.com/PHP-CS-Fixer/PHP-CS-Fixer)
+- To run code Linter use `composer fix`
+  - php cs fixer : https://github.com/PHP-CS-Fixer/PHP-CS-Fixer
+  - php cs configurator : https://mlocati.github.io/php-cs-fixer-configurator
