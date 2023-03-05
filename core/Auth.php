@@ -31,14 +31,6 @@ class Auth
 
             return true;
         }
-
-        // if ($user['password'] === $password && $user['email'] === $email) {
-        //     $_SESSION['id'] = $user['id'];
-
-        //     return true;
-        // } else {
-        //     return false;
-        // }
     }
 
 
