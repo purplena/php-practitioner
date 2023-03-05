@@ -5,14 +5,14 @@ The course is called [**The PHP Practitioner**](https://laracasts.com/series/php
 
 ## Github Codespace
 
-- This app is codespace ready, you don't need to run any install command, just open the codespace and you are ready to go.
+- Todo
 
 ## Manual install
 
 - run `docker-compose -f .devcontainer/docker-compose.yml up`
 - composer install `docker-compose -f .devcontainer/docker-compose.yml exec web composer install`
-- import database structure `cat .devcontainer/database-structure.sql | docker-compose -f .devcontainer/docker-compose.yml exec -T mysql mysql -u user -ppassword main`
 - create the `.env` file from the `.env.example` file
+- import database structure `docker-compose -f .devcontainer/docker-compose.yml exec web php core/install.php`
 
 ##  Code formatting
 
