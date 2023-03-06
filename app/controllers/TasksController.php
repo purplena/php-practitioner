@@ -9,6 +9,9 @@ class TasksController
 {
     public function index()
     {
+        if (empty(App::get('auth')->isAuthenticated())) {
+            return view('generic-tasks');
+        }
         $tasksUncompleted = $this->tasksUncompleted();
         $tasksCompleted = $this->tasksCompleted();
 
@@ -18,19 +21,23 @@ class TasksController
     public function tasksUncompleted()
     {
         return App::get('database')
-            ->query('select * from todos where completed=0 ORDER BY id DESC')
+            ->query('select * from todos where completed=0 and user_id = :user_id ORDER BY id DESC', [':user_id' => App::get('auth')->isAuthenticated()])
             ->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function tasksCompleted()
     {
         return App::get('database')
-            ->query('select * from todos where completed=1 ORDER BY id DESC')
+            ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY id DESC', [':user_id' => App::get('auth')->isAuthenticated()])
             ->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function store()
     {
+        if (empty(App::get('auth')->isAuthenticated())) {
+            return view('auth-fail-response');
+        }
+
         $errors = [];
         if (!Validator::string($_POST['description'], 1, 100)) {
             $errors['description'] = 'Your task has to be less than 100 characters';
@@ -40,18 +47,17 @@ class TasksController
         $tasksCompleted = $this->tasksCompleted();
 
         if (!empty($errors)) {
-
-            return view("tasks", [
+            return view('tasks', [
                 'errors' => $errors,
                 'tasksUncompleted' => $tasksUncompleted,
-                'tasksCompleted' => $tasksCompleted
+                'tasksCompleted' => $tasksCompleted,
             ]);
         }
 
         App::get('database')
             ->insert(
                 'todos',
-                ['description' => $this->formatTaskDescription($_POST['description'])]
+                ['description' => $this->formatTaskDescription($_POST['description']), 'user_id' => App::get('auth')->isAuthenticated()]
             );
 
         return redirect('tasks');
@@ -92,7 +98,6 @@ class TasksController
             ->selectOne('todos', [':id' => $_GET['id']])
             ->fetch(\PDO::FETCH_ASSOC);
 
-
         if ($task['completed'] === 1) {
             $newStatus = 0;
             App::get('database')
@@ -119,10 +124,14 @@ class TasksController
         $completed_tasks_by_date = $this->counterOfTasks();
         $number = App::get('database')
             ->query(
-                'SELECT COUNT(*) as count FROM todos WHERE DATE(completed_at) = :completed_at AND completed=1',
-                [':completed_at' => $_POST['completed_at']]
+                'SELECT COUNT(*) as count FROM todos WHERE DATE(completed_at) = :completed_at AND completed=1 AND user_id = :user_id',
+                [':completed_at' => $_POST['completed_at'], ':user_id' => App::get('auth')->isAuthenticated()]
             )
             ->fetch(\PDO::FETCH_ASSOC);
+
+        if (empty(App::get('auth')->isAuthenticated())) {
+            return view('auth-fail-response');
+        }
 
         return view('statistics', ['number' => $number, 'completed_tasks_by_date' => $completed_tasks_by_date]);
     }
@@ -134,10 +143,10 @@ class TasksController
         return view('statistics', ['completed_tasks_by_date' => $completed_tasks_by_date]);
     }
 
-    public  function counterOfTasks()
+    public function counterOfTasks()
     {
         $completedTasks = App::get('database')
-            ->query('select * from todos where completed=1 ORDER BY DATE(completed_at) ASC')->fetchAll(\PDO::FETCH_CLASS);
+            ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY DATE(completed_at) ASC', [':user_id' => App::get('auth')->isAuthenticated()])->fetchAll(\PDO::FETCH_CLASS);
 
         $completed_tasks_by_date = [];
 

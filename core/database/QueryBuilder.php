@@ -9,7 +9,7 @@ class QueryBuilder
         $this->pdo = $pdo;
     }
 
-    // Leave here for now. No use. 
+    // Leave here for now. No use.
     public function selectAll($table)
     {
         $statement = $this->pdo->prepare("select * from {$table}");
@@ -31,7 +31,7 @@ class QueryBuilder
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
         } catch (Exception $e) {
-            exit('Whoops, something went wrong');
+            exit('Whoops, something went wrong with INSERT method');
         }
     }
 
@@ -50,6 +50,7 @@ class QueryBuilder
         try {
             $statement = $this->pdo->prepare("select * from {$table} where id = :id");
             $statement->execute($params);
+
             return $statement;
         } catch (Exception $e) {
             exit('Whoops, problems with "Select One" method');

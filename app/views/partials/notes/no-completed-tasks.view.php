@@ -1,9 +1,9 @@
 <div class="no-tasks-container" style="
     <?php if (empty($tasksCompleted)) {
-     echo 'display: block';
+        echo 'display: block';
     } else {
-     echo 'display: none';
+        echo 'display: none';
     }
     ?>">
- <p>Once you complete your first task, it will be displayed here...</p>
+    <p>Once you complete your first task, it will be displayed here...</p>
 </div>

@@ -8,7 +8,7 @@
     </form>
 
 
-    <div class="opacity-task-color-container" style="<?php echo ($task->completed) ? 'opacity: 0.5;' : 'opacity: 1;' ?>">
+    <div class="opacity-task-color-container" style="<?php echo ($task->completed) ? 'opacity: 0.5;' : 'opacity: 1;'; ?>">
         <!-- Description(body) of a Task -->
         <div class="task-description">
             <?php if ($task->completed) {
@@ -23,19 +23,19 @@
             echo "
             <div class='date-container'>
                 <p>
-                    Task created:" . dateReformat($task->created_at) .
+                    Task created: " . dateReformat($task->created_at) .
                 "</p>
                 <p style='margin-top:0.5rem;'>
-                    Task completed:" . dateReformat($task->completed_at) .
-                "</p>
-            </div>";
+                    Task completed: " . dateReformat($task->completed_at) .
+                '</p>
+            </div>';
         } else {
             echo "
             <div class='date-container'>
                 <p>
-                    Task created:" . dateReformat($task->created_at) .
-                "</p>
-            </div>";
+                    Task created: " . dateReformat($task->created_at) .
+                '</p>
+            </div>';
         }
         ?>
 

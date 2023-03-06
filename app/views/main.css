@@ -291,6 +291,10 @@ input:focus {
   flex-direction: column;
 }
 
+.auth-form input {
+  margin-bottom: 0.75rem;
+}
+
 @media screen and (max-width: 500px) {
   .auth-form {
     padding-left: 3rem;
@@ -308,10 +312,6 @@ input:focus {
     width: 400px;
   }
 }
-
-/* .auth-form .row {
-  margin-bottom: 1rem;
-} */
 
 .log-in-message {
   margin-top: 2rem;

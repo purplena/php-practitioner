@@ -4,6 +4,6 @@ namespace App\Core;
 
 class Response
 {
- const NOT_FOUND = 404;
- const FORBIDDEN = 403;
+    public const NOT_FOUND = 404;
+    public const FORBIDDEN = 403;
 }
