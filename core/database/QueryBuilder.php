@@ -60,7 +60,7 @@ class QueryBuilder
     public function changeStatus($table, $params = [])
     {
         try {
-            $statement = $this->pdo->prepare("update {$table} set completed =:status where id = :id");
+            $statement = $this->pdo->prepare("update {$table} set completed =:status where id = :id and user_id = :user_id");
             $statement->execute($params);
         } catch (Exception $e) {
             exit('Whoops, problems with "changeStatus" method');

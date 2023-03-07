@@ -114,7 +114,7 @@ class TasksController
                 );
         }
         App::get('database')
-            ->changeStatus('todos', [':id' => $_GET['id'], ':status' => $newStatus]);
+            ->changeStatus('todos', [':id' => $_GET['id'], ':status' => $newStatus, ':user_id' => App::get('auth')->getAuthenticatedUser()]);
 
         return redirect('tasks');
     }
@@ -139,6 +139,10 @@ class TasksController
 
     public function statistics()
     {
+        if (empty(App::get('auth')->isAuthenticated())) {
+            return view('auth-fail-response');
+        }
+
         $completed_tasks_by_date = $this->counterOfTasks();
 
         return view('statistics', ['completed_tasks_by_date' => $completed_tasks_by_date]);
@@ -146,6 +150,10 @@ class TasksController
 
     public function counterOfTasks()
     {
+        // if (empty(App::get('auth')->isAuthenticated())) {
+        //     return view('auth-fail-response');
+        // }
+
         $completedTasks = App::get('database')
             ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY DATE(completed_at) ASC', [':user_id' => App::get('auth')->getAuthenticatedUser()])->fetchAll(\PDO::FETCH_CLASS);
 
