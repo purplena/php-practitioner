@@ -27,7 +27,7 @@ class Auth
     {
         $user = App::get('database')->query('select * from users where email = :email and password = :password', [':email' => $email, ':password' => $password])->fetch(\PDO::FETCH_ASSOC);
 
-        if ($user === false) {
+        if ($user == false) {
             return false;
         } else {
             $_SESSION['id'] = $user['id'];

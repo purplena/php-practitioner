@@ -98,7 +98,7 @@ class TasksController
             ->selectOne('todos', [':id' => $_GET['id']])
             ->fetch(\PDO::FETCH_ASSOC);
 
-        if ($task['completed'] === 1) {
+        if ($task['completed'] == 1) {
             $newStatus = 0;
             App::get('database')
                 ->query(
