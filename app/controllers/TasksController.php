@@ -21,14 +21,14 @@ class TasksController
     public function tasksUncompleted()
     {
         return App::get('database')
-            ->query('select * from todos where completed=0 and user_id = :user_id ORDER BY id DESC', [':user_id' => App::get('auth')->isAuthenticated()])
+            ->query('select * from todos where completed=0 and user_id = :user_id ORDER BY id DESC', [':user_id' => App::get('auth')->getAuthenticatedUser()])
             ->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function tasksCompleted()
     {
         return App::get('database')
-            ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY id DESC', [':user_id' => App::get('auth')->isAuthenticated()])
+            ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY id DESC', [':user_id' => App::get('auth')->getAuthenticatedUser()])
             ->fetchAll(\PDO::FETCH_CLASS);
     }
 
@@ -57,7 +57,7 @@ class TasksController
         App::get('database')
             ->insert(
                 'todos',
-                ['description' => $this->formatTaskDescription($_POST['description']), 'user_id' => App::get('auth')->isAuthenticated()]
+                ['description' => $this->formatTaskDescription($_POST['description']), 'user_id' => App::get('auth')->getAuthenticatedUser()]
             );
 
         return redirect('tasks');
@@ -122,10 +122,11 @@ class TasksController
     public function finishedTasks()
     {
         $completed_tasks_by_date = $this->counterOfTasks();
+
         $number = App::get('database')
             ->query(
                 'SELECT COUNT(*) as count FROM todos WHERE DATE(completed_at) = :completed_at AND completed=1 AND user_id = :user_id',
-                [':completed_at' => $_POST['completed_at'], ':user_id' => App::get('auth')->isAuthenticated()]
+                [':completed_at' => $_POST['completed_at'], ':user_id' => App::get('auth')->getAuthenticatedUser()]
             )
             ->fetch(\PDO::FETCH_ASSOC);
 
@@ -146,7 +147,7 @@ class TasksController
     public function counterOfTasks()
     {
         $completedTasks = App::get('database')
-            ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY DATE(completed_at) ASC', [':user_id' => App::get('auth')->isAuthenticated()])->fetchAll(\PDO::FETCH_CLASS);
+            ->query('select * from todos where completed=1 and user_id = :user_id ORDER BY DATE(completed_at) ASC', [':user_id' => App::get('auth')->getAuthenticatedUser()])->fetchAll(\PDO::FETCH_CLASS);
 
         $completed_tasks_by_date = [];
 

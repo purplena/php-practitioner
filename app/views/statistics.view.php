@@ -15,7 +15,7 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 require('app/views/partials/notes/count-tasks-picker.view.php');
             }
-            ?>
+?>
         </div>
     </div>
 

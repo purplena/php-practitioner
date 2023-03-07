@@ -18,6 +18,11 @@ class Auth
         return isset($_SESSION['id']);
     }
 
+    public function getAuthenticatedUser()
+    {
+        return $_SESSION['id'];
+    }
+
     public function checkUserAndAuthenticate($email, $password)
     {
         $user = App::get('database')->query('select * from users where email = :email and password = :password', [':email' => $email, ':password' => $password])->fetch(\PDO::FETCH_ASSOC);
