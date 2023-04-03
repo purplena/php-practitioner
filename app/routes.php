@@ -2,6 +2,9 @@
 
 $router->get('', 'PagesController@home');
 $router->get('log', 'PagesController@log');
+$router->get('gallery', 'PagesController@gallery');
+$router->post('storePicture', 'PagesController@store');
+$router->get('weather', 'PagesController@weather');
 
 $router->get('tasks', 'TasksController@index');
 $router->post('tasks', 'TasksController@store');

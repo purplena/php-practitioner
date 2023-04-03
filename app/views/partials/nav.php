@@ -9,6 +9,8 @@ use App\Core\App;
         <a href="/">Home</a>
         <a href="/tasks">Tasks</a>
         <a href="/tasks/statistics">Statistics</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/weather">Weather</a>
         <a href="/log">
             <?php
 

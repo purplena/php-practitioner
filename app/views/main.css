@@ -31,9 +31,8 @@ nav {
 nav a {
   display: inline-block;
   text-decoration: none;
-  margin-left: 2rem;
-  padding: 1.5rem 2.5rem;
-  font-size: 1.25rem;
+  padding: 1.25rem 1.75rem;
+  font-size: 1rem;
 }
 
 nav a:hover {
@@ -331,7 +330,7 @@ input:focus {
 .border-container {
   border: #fa7dc898 solid 2px;
   border-radius: 10px;
-  padding: 2rem;
+  padding: 1.5rem;
   margin-bottom: 2rem;
 }
 
@@ -560,4 +559,88 @@ a {
   color: #aaa5a8;
   font-size: 1.05rem;
   font-style: italic;
+}
+
+/* Weather Page */
+
+.weather-header {
+  margin-bottom: 1rem;
+}
+
+.flag {
+  display: block;
+  width: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+}
+
+.weather-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-container {
+  width: 300px;
+  text-align: center;
+}
+
+@media screen and (min-width: 550px) {
+  .weather-section-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+.weather-paragraph {
+  line-height: 1.5;
+}
+
+.weather-icon {
+  width: 70px;
+}
+
+/* GALLERY */
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.gallery-image {
+  display: block;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 650px) {
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .gallery-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.image-form {
+  text-align: center;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.label-image {
+  cursor: pointer;
 }
