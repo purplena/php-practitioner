@@ -24,9 +24,14 @@ class PagesController
 
     public function gallery()
     {
-        $images = glob("images/gallery/" . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+        $images = self::getImages();
 
         return view('gallery', ['images' => $images]);
+    }
+
+    protected static function getImages()
+    {
+        return glob("images/gallery/" . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
     }
 
     public function store()
@@ -44,7 +49,7 @@ class PagesController
                 $errors['description'] = 'File size must be less than 2 MB';
             }
 
-            $images = glob("images/gallery/" . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
+            $images = self::getImages();
 
             if (!empty($errors)) {
                 return view('gallery', [
@@ -55,9 +60,7 @@ class PagesController
 
             move_uploaded_file($file_tmp, "images/gallery/" . $file_name);
 
-            $images = glob("images/gallery/" . "*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-
-            return view('gallery', ['images' => $images]);
+            return redirect('gallery');
         }
     }
 

@@ -4,14 +4,14 @@ namespace App\Core;
 
 class Weather
 {
-    const API_KEY = "f45f133943fe5546cd4b7c357bddf7c1";
+    // const API_KEY = env('API_WEATHER_KEY');
     const LATITUDE = 42.70085587186303;
     const LONGITUDE = 2.8940680732394544;
     const UNITS = "metric";
 
     public static function buildUrl($value)
     {
-        return "https://api.openweathermap.org/data/2.5/$value?lat=" . self::LATITUDE . "&lon=" . self::LONGITUDE . "&units=" . self::UNITS . "&appid=" . self::API_KEY;
+        return "https://api.openweathermap.org/data/2.5/$value?lat=" . self::LATITUDE . "&lon=" . self::LONGITUDE . "&units=" . self::UNITS . "&appid=" . env('API_WEATHER_KEY');
     }
 
     public static function getData($url)

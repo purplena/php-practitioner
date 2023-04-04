@@ -16,18 +16,13 @@ class Validator
 
     public static function extension($file)
     {
-        $extensions = array("jpeg", "jpg", "png");
         $array = explode('.', $file['name']);
         $file_ext = strtolower(end($array));
-        if (in_array($file_ext, $extensions)) {
-            return true;
-        }
+        return in_array($file_ext, ["jpeg", "jpg", "png"]);
     }
 
     public static function size($file)
     {
-        if ($file <= self::MAX_FILE_SIZE) {
-            return true;
-        }
+        return $file <= self::MAX_FILE_SIZE;
     }
 }
